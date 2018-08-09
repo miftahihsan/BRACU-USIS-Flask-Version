@@ -33,6 +33,10 @@
     width: 100%;
     padding: 10px 0;
 }
+.error-message{
+  list-style-type: none;
+  color: red;
+}
 .btn-custom:hover{
   -moz-box-shadow: 0 0 3px #ccc;
   -webkit-box-shadow: 0 0 3px #ccc;
