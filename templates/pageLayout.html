@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    {% include 'includes/_styleSheets.html' %}
+
+  </head>
+  <body>
+
+    {% include 'includes/_navbar.html' %}
+
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
+
+
+    {% include 'includes/_scriptSheets.html' %}
+
+  </body>
+</html>

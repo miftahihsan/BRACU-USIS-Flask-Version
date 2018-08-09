@@ -1,0 +1,52 @@
+:root {
+    --main-bg-color:  rgb(39, 92, 171);;
+}
+/******************************************************************  THis is for the login page   **********************************************************************/
+#login-body{
+  color: #212121;
+  background-color: #f5f5f5;
+  font-family: "AvenirLTStd-Roman", "Helvetica", "Roboto", "Arial", "sans-serif";
+}
+
+.login-page-logo{
+  width: 260px;
+  margin: 90px 0 0 50px;
+}
+
+    /*  left side  */
+  .login-page-about-web h1{
+    font-size: 3em;
+    text-align: left;
+    margin-top: 40px;
+  }
+
+    .login-page-about-web p{
+      text-align: left;
+    }
+
+  .get-started{
+    padding: 10px;
+    font-size: 2em;
+  }
+
+  /* rigth side */
+  .login-container{
+    padding: none;
+    color: #fafafa;
+    margin-top: 7em;
+    width: 450px;
+  }
+
+  .login-header{
+    width: 100%;
+    background-color:var(--main-bg-color);
+  }
+
+  .login-header h1{
+    padding: 10px 0;
+  }
+
+  .login-form-container{
+    padding: 50px;
+    background-color: #f0f0f0;
+  }

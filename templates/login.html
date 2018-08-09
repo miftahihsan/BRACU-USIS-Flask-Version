@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    {% include 'includes/_styleSheets.html' %}
+
+  </head>
+  <body id="login-body" >
+
+    <div class="container-fluid">
+
+      <!-- parent row  -->
+      <div class="row">
+
+        <!-- parent column -->
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+
+              <div class="container cusotm-container">
+
+                  <!-- child row  -->
+                  <div class="row">
+
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <img class="login-page-logo" src="{{url_for('static', filename = 'server/logo/login_page_logo.png')}}" alt="">
+                      </div>
+
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 login-page-about-web">
+                          <!-- add brac description here -->
+                          <h1>BRAC-U Uploads</h1>
+                          <hr class="line-divider" >
+                          <p>
+                            Since its inception in 2001, BRAC University has become one of the most reputed educational institutions in Bangladesh. We have focused on generating new knowledge and promoting critical thinking amongst our students, graduating more than 7,000 young men and women during this time.
+                            Since its inception in 2001, BRAC University has become one of the most reputed educational institutions in Bangladesh. We have focused on generating new knowledge and promoting critical thinking amongst our students, graduating more than 7,000 young men and women during this time.
+                          </p>
+
+                          <br>
+                          <br>
+
+                          <a href="http://admissions.bracu.ac.bd/academia/admissionProcess/listAvailablePublishedCircularForAdmission"><button  type="submit" class="btn btn-custom get-started"> Get Started</button></a>
+
+                      </div>
+
+                  </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- parent column right used for login form wtform  -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+
+            <!--  login container body starts here  -->
+            <div class="container">
+
+                <div class="login-container card-view">
+
+                    <div class="login-header container-fluid text-center">
+                      <h1>Login Panel</h1>
+                    </div>
+
+
+                    <div class="container login-form-container">
+
+                        <!--  login form stats here  -->
+                        <form method="POST">
+
+                            <!--  cross site request forgery  -->
+                            {{ form.csrf_token }}
+
+                            <div class="form-group">
+
+                              <label for="exampleInputEmail1" style="color:black;" >Email address</label>
+                              <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                              {{ form.username(class = 'form-control', id = 'exampleInputEmail1', placeholder='Enter email') }}
+                              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                              <ul>
+                                {% for error in form.username.errors %}
+                                  <li>{{ error }}</li>
+                                {% endfor %}
+                              </ul>
+
+
+                            </div>
+                            <div class="form-group">
+
+                              <label for="exampleInputPassword1" style="color:black;" >Password</label>
+                              <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
+                              {{ form.password(class = 'form-control', id = 'exampleInputPassword1', placeholder='Password') }}
+                              <ul>
+                                {% for error in form.password.errors %}
+                                  <li>{{ error }}</li>
+                                {% endfor %}
+                              </ul>
+
+
+                            </div>
+
+                            <div class="row">
+
+                              <div class="form-group form-check col container ">
+
+                              </div>
+
+                              <div class="form-group form-check col" style="text-align:right;">
+
+                                  <a href="#">Forgot password?</a>
+
+                              </div>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-custom">Submit</button>
+
+                        </form>
+                        <!--  login form ends here  -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    {% include 'includes/_scriptSheets.html' %}
+  </body>
+</html>
