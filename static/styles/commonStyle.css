@@ -1,6 +1,8 @@
 :root {
     --main-bg-color:  rgb(39, 92, 171);
 }
+
+/*  global variable decleared above  */
 .cusotm-container{
   margin: 75px auto;;
 }
@@ -29,18 +31,31 @@
     transition: 0.5s;
     background-color: var(--main-bg-color);
     color: white;
-
     width: 100%;
     padding: 10px 0;
 }
+  .btn-custom:hover{
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 5px #ccc;
+    background: #E0E0E0;
+    color: var(--main-bg-color);
+  }
+.btn-custom-white{
+  -moz-box-shadow: 0 0 6px #212121;
+  -webkit-box-shadow: 0 0 6px #212121;
+  box-shadow: 0 0 6px #212121;
+  transition: 0.5s;
+  background-color: white;
+  color: var(--main-bg-color);
+}
+  .btn-custom-white:hover{
+    -moz-box-shadow: 0 0 6px #212121;
+    -webkit-box-shadow: 0 0 6px #212121;
+    box-shadow: 0 0 6px #212121;
+    background: #64B5F6;
+  }
 .error-message{
   list-style-type: none;
   color: red;
-}
-.btn-custom:hover{
-  -moz-box-shadow: 0 0 3px #ccc;
-  -webkit-box-shadow: 0 0 3px #ccc;
-  box-shadow: 0 0 5px #ccc;
-  background: #E0E0E0;
-  color: var(--main-bg-color);
 }

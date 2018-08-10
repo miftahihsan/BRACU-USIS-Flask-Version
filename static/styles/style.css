@@ -1,6 +1,38 @@
 :root {
-    --main-bg-color:  rgb(39, 92, 171);;
+    --main-bg-color:  rgb(39, 92, 171);
 }
+/*  global variable decleared above  */
+/******************************************************************  THis is for the layout page   **********************************************************************/
+.layout-page-id{
+
+}
+
+/******************************************************************  THis is for the Nav bar page   **********************************************************************/
+.my-custom-navbar{
+  font-size: 1.5em;
+}
+  .custom-navbar-search-bar{
+    width: 300px !important;
+  }
+  .custom-navbar-items > li{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .custom-navbar-items li:hover{
+    background-color: #0D47A1;
+  }
+  .custom-navbar-logo{
+    width: 50px;
+    margin-right: 10px;
+  }
+.bg-custom{
+  background-color:var(--main-bg-color);
+  color white;
+}
+.search-button{
+  width: 90px;
+}
+
 /******************************************************************  THis is for the login page   **********************************************************************/
 #login-body{
   color: #212121;
@@ -50,3 +82,5 @@
     padding: 50px;
     background-color: #f0f0f0;
   }
+
+/******************************************************************  THis is for the subscribed page   **********************************************************************/
