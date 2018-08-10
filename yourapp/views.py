@@ -1,15 +1,15 @@
 from flask import render_template, request, redirect, url_for
 from app import app
 from yourapp.forms import LoginForm
-from yourapp.models import student_info
+from yourapp.models import login
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     form = LoginForm()
     if form.validate_on_submit():
-        # return redirect(url_for('home'));
-        name = student_info.query.first()
-        return "whats good"
+
+        rv = login.userLogin()
+        return rv
 
     return render_template('login.html', form=form)
 
