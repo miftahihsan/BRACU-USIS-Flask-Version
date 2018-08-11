@@ -1,20 +1,46 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session, request, g
 from app import app
+from yourapp.sqlQueries import QueryClass
 from yourapp.forms import LoginForm
-from yourapp.models import user_info
+from yourapp.forms import AddTeacherForm
+# this impor should be moved to sql queries
+from yourapp.models import student_info
 
-@app.route('/', methods = ['GET', 'POST'])
-def index():
+
+# this takes you to login page
+@app.route('/user_login', methods = ['GET', 'POST'])
+def loginPage():
     form = LoginForm()
     if form.validate_on_submit():
 
-        # first_student = user_info.query.first()
-        # return first_student.student_name
-        # return form.username.data
-        return redirect('home')
+        return redirect(url_for('subscribedRoom'))
 
     return render_template('login.html', form=form)
 
-@app.route('/home')
-def home():
-    return render_template('home.html');
+
+# this takes you to subscribedPage page
+@app.route('/subscribedRoom')
+def subscribedRoom():
+    return render_template('subscribedRoom.html');
+
+
+
+
+# these are the admin routes not needed for out project
+# but only needed for demonstration purposes
+@app.route('/adminPanel')
+def adminPanel():
+    return render_template('adminScripts/adminPanel.html');
+
+# adding the teacher route here
+@app.route('/addTeacher', methods = ['GET', 'POST'])
+def addTeacher():
+    form = AddTeacherForm()
+
+    if form.validate_on_submit():
+
+        QueryClass.AddTeacher()
+
+        return form.teacher_name.data
+
+    return render_template('adminScripts/addTeacher.html', form = form)

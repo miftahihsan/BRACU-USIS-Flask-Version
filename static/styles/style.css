@@ -1,10 +1,44 @@
 :root {
     --main-bg-color:  rgb(39, 92, 171);
+    --main-bg-login-div: #f0f0f0;
 }
 /*  global variable decleared above  */
-/******************************************************************  THis is for the layout page   **********************************************************************/
-.layout-page-id{
+/******************************************************************  THis is for the admin page   **********************************************************************/
+.admin-header{
+  color: white;
+  background-color: rgb(255, 90, 105);
+}
+.admin-container-body{
+  padding: 20px;
+  background-color: var(--main-bg-login-div);
+}
+  .admin-container{
+    margin: 250px 500px;
+    text-align: center;
+  }
 
+.admin-teacher-add-container{
+  margin:30px auto 0 auto;
+  width: 700px;
+  padding: 50px;
+  border: 1px solid;
+
+  background-color: var(--main-bg-login-div);
+}
+#add-teacher-body{
+  width: 100%;
+  height: 100%;
+
+  background-color: #616161;
+}
+.admin-panel-dpt-select{
+  width: 100%;
+  height: 35px;
+}
+
+/******************************************************************  THis is for the layout page   **********************************************************************/
+#layout-page-id{
+  min-width: 700px;
 }
 
 /******************************************************************  THis is for the Nav bar page   **********************************************************************/
@@ -80,7 +114,27 @@
 
   .login-form-container{
     padding: 50px;
-    background-color: #f0f0f0;
+    background-color: var(--main-bg-login-div);
   }
 
-/******************************************************************  THis is for the subscribed page   **********************************************************************/
+/******************************************************************  THis is for the subscribedRoom page   **********************************************************************/
+.subscribed-room{
+  margin-bottom: 25px;
+}
+.subscribed-room-container{
+  margin: 50px 50px;
+}
+  .subscribed-room-header-container{
+    height: 160px;
+    padding: 20px;
+    color: white;
+    background-color: var(--main-bg-color);
+  }
+    .subscribed-room-header-container a{
+      text-decoration: none;
+      color: inherit;
+    }
+  .subscribed-room-body-container{
+      background-color: var(--main-bg-login-div);
+      padding: 20px;
+  }

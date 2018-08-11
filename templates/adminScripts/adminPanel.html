@@ -1,0 +1,33 @@
+{% extends 'adminScripts/admin_layout.html' %}
+
+{% block admin_layout %}
+  
+  <div class="admin-container card-view">
+
+    <div class="admin-container-wrapper">
+
+      <div class="admin-header card-view">
+        <h1>Admin Pannel</h1>
+      </div>
+
+      <div class="admin-container-body">
+
+        <div class="row">
+
+            <div class="col-md-12 col-lg-12" style="margin-bottom:20px;">
+                <a href="#"><button class="btn btn-custom" type="button" name="button">Register Student</button></a>
+            </div>
+
+            <div class="col-md-12 col-lg-12">
+                <a href="/addTeacher"><button class="btn btn-custom" type="button" name="button">Register Teacher</button></a>
+            </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}
