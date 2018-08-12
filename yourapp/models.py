@@ -88,3 +88,10 @@ class wall_post(db.Model):
     user_identity = db.Column(db.Unicode)
     poster_id = db.Column(db.Integer)
     post = db.Column(db.Unicode)
+
+
+# Setting up the Many to Manny Cardinality Relation Ship and association tables
+# belongs_to = db.Table('belongs_to', {
+#     db.Column('student_id', db.Integer, db.ForeignKey('student_info.student_id'))
+#     db.Column('class_room_id', db.Integer, db.ForeignKey('class_room.class_room_id'))
+# })
