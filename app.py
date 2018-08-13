@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session, request, g
 from flask_sqlalchemy import SQLAlchemy
 # from flask.ext.mysqldb import MySQL
 # from flask_mysqldb import MySQL

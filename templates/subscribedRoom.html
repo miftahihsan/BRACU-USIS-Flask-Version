@@ -2,6 +2,7 @@
 
 {% block body %}
 
+  <!-- <img src="url_for('static', filename = 'logo/login_page_logo.png')" alt=""> -->
   <div class="subscribed-room-container">
 
       <div class="row">
@@ -13,10 +14,13 @@
               <div class="subscribed-room">
 
                   <div class="subscribed-room-header-container card-view">
+
                       <a href="#"><h1 class=" hide-text-length" > <strong>CSE 420</strong> Compiler design (3 credits) <h1>
                         <h4>4</h4>
                         <strong><i>~ Suriyah Tarin Pakhi</i></strong>
                       </a>
+
+                      <img class="subscribed-box-profilePic" src="{{url_for('static', filename = 'server/teacher_profile_pic/default.jpg')}}"  alt="">
 
                   </div>
 
@@ -35,6 +39,7 @@
               </div>
 
           </div>
+
 
       </div>
 

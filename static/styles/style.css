@@ -41,7 +41,11 @@
   min-width: 700px;
 }
 
-/******************************************************************  THis is for the Nav bar page   **********************************************************************/
+/******************************************************************  THis is for the Nav bar   **********************************************************************/
+.navbar{
+  padding: 0;
+  padding-left: 20px;
+}
 .my-custom-navbar{
   font-size: 1.5em;
 }
@@ -120,6 +124,13 @@
 /******************************************************************  THis is for the subscribedRoom page   **********************************************************************/
 .subscribed-room{
   margin-bottom: 25px;
+}
+.subscribed-box-profilePic{
+    width: 60px;
+    border-radius: 50%;
+    right: 0;
+    position: absolute;
+    margin: 15px 35px 0 0;
 }
 .subscribed-room-container{
   margin: 50px 50px;
