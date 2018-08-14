@@ -144,8 +144,22 @@
     .subscribed-room-header-container a{
       text-decoration: none;
       color: inherit;
+      outline:none;
     }
   .subscribed-room-body-container{
       background-color: var(--main-bg-login-div);
       padding: 20px;
   }
+
+
+/******************************************************************  THis is for the ClassRoom page   **********************************************************************/
+.teacehr-banner{
+  background: green;
+  height: 400px;
+}
+
+.class-room-teacher-pic{
+    width: 60px;
+    border-radius: 50%;
+    /* margin-top: 12%; */
+}

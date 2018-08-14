@@ -1,8 +1,9 @@
 from app import db
 import re
+from yourapp.views import session
 from werkzeug.security import generate_password_hash, check_password_hash
-from yourapp.models import teacher_info, student_info
-from yourapp.models import teacher_availability
+from yourapp.models import *
+# from yourapp.models import teacher_availability
 
 class QueryClass:
 
@@ -50,6 +51,13 @@ class QueryClass:
             else:
 
                 return False, 'None', 'None'
+
+
+    def FetchSubscribedRoom(self):
+
+         subscribed_room_details = db.session.query(student_info, belongs_to, class_room, course, teacher_info, course_info).join(belongs_to).filter(belongs_to.student_id == 1).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(teacher_info).filter(course.teacher_id == teacher_info.teacher_id).join(course_info).filter(course_info.course_code == course.course_code).all()
+
+         return subscribed_room_details
 
     # ===================================================================ADMIN SIDE======================================================================
 
