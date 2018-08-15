@@ -2,8 +2,6 @@ from flask import render_template, request, redirect, url_for, session, request,
 from app import app
 from yourapp.sqlQueries import QueryClass
 from yourapp.forms import LoginForm , AddTeacherForm, AddStudentForm
-# this impor should be moved to sql queries
-# from yourapp.models import student_info
 
 # ================================================================User Side========================================================================
 
@@ -49,13 +47,32 @@ def subscribedRoom():
     else:
         return redirect(url_for('user_login'))
 
-@app.route('/classRoom/<string:id>/<string:code>/<string:details>', methods = ['GET'])
-def classRoom(id, code, details):
+@app.route('/classRoom/<string:teacher_id>/<int:section>/<string:code>/<string:details>', methods = ['GET'])
+def classRoom(teacher_id, section, code, details):
 
+    # Checking if the sessions are still up
     if g.user_Identity and g.user_Id:
 
-        return render_template('classRoom.html');
+        # return str(session["user_id"])
+        # checking if user wants to access other classrooms
+        # buy chaning the url
+        # may be this is not even needed
+        # check later
+        is_authorized = query.CheckAuthorization(teacher_id, section, code)
+
+        # if authorized only then show classRoom
+        if is_authorized:
+
+            teacher_name = query.TeacherName(teacher_id)
+
+            return render_template('classRoom.html', teacher_id = teacher_id, section = section, code = code, details = details, teacher_name = teacher_name);
+
+        # else return him back to his subscribed room
+        return redirect(url_for('subscribedRoom'))
+
     else:
+
+        # if session has been cleared logout user
         return redirect(url_for('user_login'))
 
 @app.before_request
@@ -83,8 +100,6 @@ def addStudent():
 
     if form.validate_on_submit():
 
-        # query = QueryClass()
-
         query.AddStudent(form.student_name.data, form.student_email.data, form.student_password.data,
         form.student_phone.data, form.student_department.data, form.student_sem.data)
 
@@ -98,7 +113,6 @@ def addTeacher():
     form = AddTeacherForm()
 
     if form.validate_on_submit():
-        # query = QueryClass()
 
         query.AddTeacher(form.teacher_name.data, form.teacher_consultation.data, form.teacher_email.data,
         form.teacher_password.data, form.teacher_department.data, form.teacher_phone.data,

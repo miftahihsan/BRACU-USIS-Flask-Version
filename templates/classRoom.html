@@ -6,9 +6,31 @@
 
 
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 teacehr-banner">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 teacher-banner">
+
+      <h1><strong>{{code}}</strong>{{" "+details}}</h1>
+
       <img class="class-room-teacher-pic display-center" src="{{url_for('static', filename = 'server/teacher_profile_pic/default.jpg')}}" alt="">
+
+      <div class="availability-conatiner container">
+
+        <div class="availability-text">
+          Available
+        </div>
+
+        <div class="availability-div">
+          <div class="off-line">
+
+          </div>
+        </div>
+
+        <p> ~ <i>{{ teacher_name }}</i> </p>
+
+      </div>
+
     </div>
+
   </div>
 
 

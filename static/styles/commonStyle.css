@@ -51,6 +51,20 @@
     background: #E0E0E0;
     color: var(--main-bg-color);
   }
+.online{
+  background-color: green;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.off-line{
+  background-color: red;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
 .btn-custom-white{
   -moz-box-shadow: 0 0 6px #212121;
   -webkit-box-shadow: 0 0 6px #212121;

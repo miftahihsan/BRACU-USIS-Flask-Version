@@ -39,12 +39,22 @@
 /******************************************************************  THis is for the layout page   **********************************************************************/
 #layout-page-id{
   min-width: 700px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 /******************************************************************  THis is for the Nav bar   **********************************************************************/
 .navbar{
-  padding: 0;
-  padding-left: 20px;
+  /* padding: 0; */
+  padding: 3px 0 3px 20px;
+  /* padding-left: 20px; */
+}
+.nav-link{
+  outline: none;
+}
+.nav-shadow{
+  /* border: 1px solid gray; */
+  box-shadow: 0 5px 5px #59616b;
 }
 .my-custom-navbar{
   font-size: 1.5em;
@@ -153,13 +163,23 @@
 
 
 /******************************************************************  THis is for the ClassRoom page   **********************************************************************/
-.teacehr-banner{
-  background: green;
+.teacher-banner{
+  /* background: green; */
+  background-color: #21406d;
   height: 400px;
+  text-align: center;
+  color: white;
 }
+  .teacher-banner h1{
+    /* margin-top: 8%; */
+    margin-top: 110px;
+  }
 
 .class-room-teacher-pic{
     width: 60px;
     border-radius: 50%;
-    /* margin-top: 12%; */
+    margin-top: 30px;
+}
+.availability-conatiner{
+    margin-top: 20px;
 }

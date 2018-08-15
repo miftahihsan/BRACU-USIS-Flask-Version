@@ -11,6 +11,7 @@ class QueryClass:
     def UserLogin(self, user_name, password):
 
         # Simple regex for checking if string has an @
+        # if needed a real mail validator can be used
         is_email = re.match(r"[^@]+@[^@]+\.[^@]+", user_name)
 
         if is_email:
@@ -53,11 +54,36 @@ class QueryClass:
                 return False, 'None', 'None'
 
 
+    def TeacherName(self, teacher_id):
+
+        teacher_name = teacher_info.query.filter_by(teacher_id = teacher_id).first()
+
+        return teacher_name.teacher_name
+
+    # returns all the reoom details
     def FetchSubscribedRoom(self):
 
-         subscribed_room_details = db.session.query(student_info, belongs_to, class_room, course, teacher_info, course_info).join(belongs_to).filter(belongs_to.student_id == 1).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(teacher_info).filter(course.teacher_id == teacher_info.teacher_id).join(course_info).filter(course_info.course_code == course.course_code).all()
+         subscribed_room_details = db.session.query(student_info, belongs_to, class_room, course, teacher_info, course_info).join(belongs_to).filter(belongs_to.student_id == session["user_id"]).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(teacher_info).filter(course.teacher_id == teacher_info.teacher_id).join(course_info).filter(course_info.course_code == course.course_code).all()
 
          return subscribed_room_details
+
+
+    # may be this is not needed after all
+    # check back later
+    def CheckAuthorization(self,teacher_id, course_section, course_code):
+        __tablename__ = 'HAH'
+
+        returnedValue = db.session.query(teacher_info, course, class_room, belongs_to, student_info).join(course).filter(teacher_info.teacher_id == teacher_id).join(class_room).filter(class_room.class_room_id == course.class_room_id).join(belongs_to).filter(belongs_to.class_room_id == class_room.class_room_id).join(student_info).filter(student_info.student_id == session["user_id"]).first()
+
+        if returnedValue:
+            if str(returnedValue.teacher_info.teacher_id) == teacher_id and str(returnedValue.course.course_section) ==course_section and str(returnedValue.course.course_section) == course_code:
+                return True
+            return returnedValue.course.teacher_id
+        else:
+            return False
+
+        # return False
+
 
     # ===================================================================ADMIN SIDE======================================================================
 
