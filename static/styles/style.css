@@ -206,3 +206,8 @@
 .availability-conatiner{
     margin-top: 20px;
 }
+.container-class-room{
+  margin: 0 auto 0 30px;
+  width: 100%;
+  background-color: orange;
+}
