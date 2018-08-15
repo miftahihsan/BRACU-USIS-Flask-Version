@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, request, g
 from app import app
-from yourapp.sqlQueries import QueryClass
+from yourapp.sqlQueries import QueryClass, generate_password_hash, check_password_hash
 from yourapp.forms import LoginForm , AddTeacherForm, AddStudentForm
 
 # ================================================================User Side========================================================================
@@ -43,8 +43,21 @@ def subscribedRoom():
 
         room_details = query.FetchSubscribedRoom()
 
+        # hashing the teacers_id but taking the pbkdf2:sha256: out of it
+        # to prevent the user from knowing knoing the algorithm
+        # teacher_hashed_id = [None] * len(room_details)
+        # counter = 0
+        # for i in room_details:
+        #
+        #
+        #     temp = generate_password_hash(str(i.teacher_info.teacher_id))
+        #     teacher_hashed_id[counter] = temp[14:]
+        #     counter = counter+1
+
         return render_template('subscribedRoom.html', room_details = room_details);
+
     else:
+
         return redirect(url_for('user_login'))
 
 @app.route('/classRoom/<string:teacher_id>/<int:section>/<string:code>/<string:details>', methods = ['GET'])
@@ -58,7 +71,7 @@ def classRoom(teacher_id, section, code, details):
         # buy chaning the url
         # may be this is not even needed
         # check later
-        is_authorized = query.CheckAuthorization(teacher_id, section, code)
+        is_authorized = query.CheckAuthorization(teacher_id, section, code, details)
 
         # if authorized only then show classRoom
         if is_authorized:

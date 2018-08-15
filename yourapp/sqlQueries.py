@@ -70,17 +70,15 @@ class QueryClass:
 
     # may be this is not needed after all
     # check back later
-    def CheckAuthorization(self,teacher_id, course_section, course_code):
+    def CheckAuthorization(self,teacher_id, course_section, course_code, details):
         __tablename__ = 'HAH'
 
-        returnedValue = db.session.query(teacher_info, course, class_room, belongs_to, student_info).join(course).filter(teacher_info.teacher_id == teacher_id).join(class_room).filter(class_room.class_room_id == course.class_room_id).join(belongs_to).filter(belongs_to.class_room_id == class_room.class_room_id).join(student_info).filter(student_info.student_id == session["user_id"]).first()
+        returnedValue =  db.session.query(student_info, belongs_to, class_room, course, course_info).join(belongs_to).filter(belongs_to.student_id == 1).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(course_info).filter(course_info.course_code == course.course_code).all()
 
-        if returnedValue:
-            if str(returnedValue.teacher_info.teacher_id) == teacher_id and str(returnedValue.course.course_section) ==course_section and str(returnedValue.course.course_section) == course_code:
+        for i in returnedValue:
+            if str(session['user_id']) == str(i.student_info.student_id) and str(teacher_id) == str(i.course.teacher_id) and str(course_section) == str(i.course.course_section) and course_code == i.course.course_code and details == i.course_info.course_name:
                 return True
-            return returnedValue.course.teacher_id
-        else:
-            return False
+        return False
 
         # return False
 
