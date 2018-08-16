@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, session, request,
 from app import app
 from yourapp.sqlQueries import QueryClass, generate_password_hash, check_password_hash
 from yourapp.forms import LoginForm , AddTeacherForm, AddStudentForm
+from app import socketio, emit
 
 # ================================================================User Side========================================================================
 
@@ -11,6 +12,8 @@ query = QueryClass()
 # this takes you to login page
 @app.route('/user_login', methods = ['GET', 'POST'])
 def user_login():
+
+    print("WhatsUP")
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -25,9 +28,15 @@ def user_login():
             if user_identity == "Student":
                 return redirect(url_for('subscribedRoom'))
             else:
-                return redirect(url_for('user_login'))
+                return redirect(url_for('teacherChannels'))
 
     return render_template('login.html', form=form)
+
+
+@app.route("/teacherChannels")
+def teacherChannels():
+
+    return render_template('teacherChannels.html')
 
 # USER LOGOUT
 @app.route('/logOut')
@@ -71,14 +80,17 @@ def classRoom(teacher_id, section, code, details):
         # buy chaning the url
         # may be this is not even needed
         # check later
-        is_authorized = query.CheckAuthorization(teacher_id, section, code, details)
+        is_authorized, availability = query.CheckAuthorization(teacher_id, section, code, details)
 
         # if authorized only then show classRoom
         if is_authorized:
 
+            session['channelOwnerId'] = teacher_id;
+
             teacher_name = query.TeacherName(teacher_id)
 
-            return render_template('classRoom.html', teacher_id = teacher_id, section = section, code = code, details = details, teacher_name = teacher_name);
+            return render_template('classRoom.html', teacher_id = teacher_id, section = section,
+             code = code, details = details, teacher_name = teacher_name, teacher_availability = availability);
 
         # else return him back to his subscribed room
         return redirect(url_for('subscribedRoom'))
@@ -96,6 +108,16 @@ def before_request():
         g.user_Identity = session['user_Identity']
         g.user_Id = session['user_id']
 
+# ================================================================Socket side code========================================================================
+
+@socketio.on('availabilityRequest')
+def handleAvailability(available, teacher_id):
+
+    query.TeacherAvailability(available, teacher_id)
+
+    print("hello")
+
+    emit('ShowAvailability', {'availability' : available, 'teacherID' : teacher_id}, broadcast = True)
 
 # ================================================================Admin Side========================================================================
 

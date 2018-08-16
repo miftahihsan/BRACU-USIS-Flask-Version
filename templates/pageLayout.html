@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" ng-app = "app" ng-init = "selectedChanelID = '{{session['channelOwnerId']}}'; teacher_id = '{{session['user_id']}}';">
   <head>
     <meta charset="utf-8">
 
     {% include 'includes/_styleSheets.html' %}
 
   </head>
-  <body id="layout-page-id" >
+  <body id="layout-page-id"  ng-controller = 'control-div-class-room'  >
 
     {% include 'includes/_navbar.html' %}
 
@@ -15,7 +15,14 @@
     </div>
 
 
+
     {% include 'includes/_scriptSheets.html' %}
+
+
+
+
+    <!-- Calling in my custom file  -->
+    <script type="text/javascript" src="{{url_for('static', filename = 'javaScripts/socketIO.js')}}"></script>
 
   </body>
 </html>

@@ -3,6 +3,7 @@ import re
 from yourapp.views import session
 from werkzeug.security import generate_password_hash, check_password_hash
 from yourapp.models import *
+
 # from yourapp.models import teacher_availability
 
 class QueryClass:
@@ -60,6 +61,21 @@ class QueryClass:
 
         return teacher_name.teacher_name
 
+    # teacher availability changes here
+    def TeacherAvailability(self, availability, teacher_id):
+
+        changeAvailability = teacher_availability.query.filter_by(teacher_id = teacher_id).first()
+
+        # if it is already the same as database returnedValue
+        # Then no need for changes
+        # Else change
+        if changeAvailability.availability != availability:
+
+            changeAvailability.availability = availability
+            db.session.commit()
+
+
+
     # returns all the reoom details
     def FetchSubscribedRoom(self):
 
@@ -73,12 +89,13 @@ class QueryClass:
     def CheckAuthorization(self,teacher_id, course_section, course_code, details):
         __tablename__ = 'HAH'
 
+        current_availability = teacher_availability.query.filter_by(teacher_id = teacher_id).first()
         returnedValue =  db.session.query(student_info, belongs_to, class_room, course, course_info).join(belongs_to).filter(belongs_to.student_id == 1).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(course_info).filter(course_info.course_code == course.course_code).all()
 
         for i in returnedValue:
             if str(session['user_id']) == str(i.student_info.student_id) and str(teacher_id) == str(i.course.teacher_id) and str(course_section) == str(i.course.course_section) and course_code == i.course.course_code and details == i.course_info.course_name:
-                return True
-        return False
+                return True, current_availability.availability
+        return False, availability
 
         # return False
 
