@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" ng-app = "app" ng-init = "selectedChanelID = '{{session['channelOwnerId']}}'; teacher_id = '{{session['user_id']}}';">
+<html lang="en" dir="ltr" ng-app = "app" ng-init = "selectedChanelID = '{{ session['channelOwnerId'] }}'; teacher_loged_in_id = '{{ session['user_id'] }}';
+teacher_availability = '{{ availability }}'; user_identity = '{{ session['user_Identity'] }}'; ">
   <head>
     <meta charset="utf-8">
 
@@ -16,9 +17,9 @@
 
 
 
+
+
     {% include 'includes/_scriptSheets.html' %}
-
-
 
 
     <!-- Calling in my custom file  -->

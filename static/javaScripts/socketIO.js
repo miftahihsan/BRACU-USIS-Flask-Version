@@ -4,33 +4,32 @@ var app = angular.module("app", []);
 // then recognize all the container variables
 app.controller("control-div-class-room", function($scope){
 
-    // creating the online offline id to show realtime
-    // var x = $scope.name;
-
-    // var teacherAvailabilityId = "teacher_profile_pic_" + x;
-
-    // $scope.W = "hello";
-    // This is where I will connect with the server and set everything up
-
     // connected to the socket
     socket = io.connect("http://127.0.0.1:5000");
 
-
-
     // When the teacher presses the online/offline button
      // This function will get called
-    $scope.onclick = function(){
 
-      var availability = 0;
-      if($scope.checked){
-        availability = 1;
+
+    $scope.teacherLogOut = function(){
+
+      if($scope.user_identity == "Teacher"){
+        socket.emit('teacherLogOutRequest', 0, $scope.teacher_loged_in_id);
       }
 
-      // alert($scope.teacher_id);
-      // alert($scope.teacher_banner_id);
+    }
 
+    $scope.teacherOnclick = function(){
 
-      socket.emit('availabilityRequest', availability, $scope.teacher_id);
+        var availability = 0;
+
+        if($scope.checked){
+
+            availability = 1;
+
+        }
+
+        socket.emit('availabilityRequest', availability, $scope.teacher_loged_in_id);
 
     }
 
@@ -38,31 +37,30 @@ app.controller("control-div-class-room", function($scope){
     // Here we perform the check for teacher availability
     socket.on('ShowAvailability', function(results){
 
+      // used to change teacher availability indicator
       var availability = results.availability;
-
       var teacherID = results.teacherID;
-
       var teacherAvailabilityId = "teacher_profile_pic_" + teacherID + "";
 
-      // alert(document.getElementsByClassName('off-line')[0].id);
+      // used to chnage the text of availabilityRequest
+      var availabilityText = "availability-text-"+teacherID+"";
+      myTextElement = angular.element(document.querySelector("#"+availabilityText+""));
 
-      // alert(teacherAvailabilityId);
-
-      // var availabilityIconJquery = document.getElementById("teacherAvailabilityId");
-
-      // angular.element(availabilityIconJquery);
 
 
       if(availability == 0){
-        document.getElementById("teacherAvailabilityId").classList.add('off-line');
+
+        $("#"+teacherAvailabilityId+"").css('background-color', 'red');
+        myTextElement.text('Not available');
+
       }else{
-        // alert(teacherAvailabilityId);
-        document.getElementById("teacherAvailabilityId").classList.add('online');
+
+        $("#"+teacherAvailabilityId+"").css('background-color', '#64ff56');
+        myTextElement.text('Available');
+
       }
 
+
     });
-
-
-
 
 });

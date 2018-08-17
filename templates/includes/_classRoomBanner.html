@@ -8,17 +8,34 @@
 
     <div class="availability-conatiner container">
 
-      <div class="availability-text">
-        Available
+
+      <div class="availability-div" ng-init = "name = 'Miftah'">
+        {% if availability == 0 %}
+        <div id="availability-text-{{session['channelOwnerId']}}" class="availability-text">
+          Not available
+        </div>
+          <div id="teacher_profile_pic_{{session['channelOwnerId']}}"  class="off-line">
+            <!-- {{availability}} -->
+          </div>
+        {% else %}
+        <div id = "availability-text-{{session['channelOwnerId']}}" class="availability-text">
+          Available
+        </div>
+        <div id="teacher_profile_pic_{{session['channelOwnerId']}}"  class="online">
+
+        </div>
+        {% endif %}
+
+        {{name}}
       </div>
 
-      <div class="availability-div">
+      <!-- <div class="availability-div">
 
-        <div id="teacher_profile_pic_{{session['channelOwnerId']}}"  class="off-line"> <!-- class="off-line -->
+        <div id="teacher_profile_pic_{{session['channelOwnerId']}}"  class="off-line">
 
         </div>
 
-      </div>
+      </div> -->
 
       <p> ~ <i>{{ teacher_name }}</i> </p>
 

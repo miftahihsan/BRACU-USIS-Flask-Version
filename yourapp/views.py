@@ -13,7 +13,8 @@ query = QueryClass()
 @app.route('/user_login', methods = ['GET', 'POST'])
 def user_login():
 
-    print("WhatsUP")
+    if g.user_Identity and g.user_Id:
+        return redirect(url_for('subscribedRoom'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -55,13 +56,6 @@ def subscribedRoom():
         # hashing the teacers_id but taking the pbkdf2:sha256: out of it
         # to prevent the user from knowing knoing the algorithm
         # teacher_hashed_id = [None] * len(room_details)
-        # counter = 0
-        # for i in room_details:
-        #
-        #
-        #     temp = generate_password_hash(str(i.teacher_info.teacher_id))
-        #     teacher_hashed_id[counter] = temp[14:]
-        #     counter = counter+1
 
         return render_template('subscribedRoom.html', room_details = room_details);
 
@@ -90,7 +84,7 @@ def classRoom(teacher_id, section, code, details):
             teacher_name = query.TeacherName(teacher_id)
 
             return render_template('classRoom.html', teacher_id = teacher_id, section = section,
-             code = code, details = details, teacher_name = teacher_name, teacher_availability = availability);
+             code = code, details = details, teacher_name = teacher_name, availability = availability);
 
         # else return him back to his subscribed room
         return redirect(url_for('subscribedRoom'))
@@ -110,12 +104,19 @@ def before_request():
 
 # ================================================================Socket side code========================================================================
 
+@socketio.on('teacherLogOutRequest')
+def teacherLogOutRequest(loged_out, teacher_id):
+
+    query.TeacherAvailability(loged_out, teacher_id)
+
+    emit('ShowAvailability', {'availability' : 0, 'teacherID' : teacher_id}, broadcast = True)
+
 @socketio.on('availabilityRequest')
 def handleAvailability(available, teacher_id):
 
     query.TeacherAvailability(available, teacher_id)
 
-    print("hello")
+    # print("hello")
 
     emit('ShowAvailability', {'availability' : available, 'teacherID' : teacher_id}, broadcast = True)
 

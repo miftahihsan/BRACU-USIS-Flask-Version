@@ -52,7 +52,7 @@
     color: var(--main-bg-color);
   }
 .online{
-  background-color: green;
+  background-color: #64ff56;
   width: 12px;
   height: 12px;
   border-radius: 50%;

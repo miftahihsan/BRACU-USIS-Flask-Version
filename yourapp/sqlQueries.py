@@ -62,16 +62,12 @@ class QueryClass:
         return teacher_name.teacher_name
 
     # teacher availability changes here
-    def TeacherAvailability(self, availability, teacher_id):
+    def TeacherAvailability(self, available, teacher_id):
 
-        changeAvailability = teacher_availability.query.filter_by(teacher_id = teacher_id).first()
-
-        # if it is already the same as database returnedValue
-        # Then no need for changes
-        # Else change
-        if changeAvailability.availability != availability:
-
-            changeAvailability.availability = availability
+        changedAvailability = teacher_availability.query.filter_by(teacher_id = teacher_id).first()
+        # print("")
+        if changedAvailability.availability != available:
+            changedAvailability.availability = available
             db.session.commit()
 
 
@@ -95,7 +91,7 @@ class QueryClass:
         for i in returnedValue:
             if str(session['user_id']) == str(i.student_info.student_id) and str(teacher_id) == str(i.course.teacher_id) and str(course_section) == str(i.course.course_section) and course_code == i.course.course_code and details == i.course_info.course_name:
                 return True, current_availability.availability
-        return False, availability
+        return False, current_availability.availability
 
         # return False
 
