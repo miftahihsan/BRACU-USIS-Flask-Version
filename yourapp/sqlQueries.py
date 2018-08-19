@@ -54,6 +54,25 @@ class QueryClass:
 
                 return False, 'None', 'None'
 
+    def MakePost(self, class_room_id, user_identity, student_id, teacher_id, post_text):
+
+        postOnWall = wall_post(class_room_id = class_room_id, user_identity = user_identity,
+        teacher_id = teacher_id, student_id = student_id, post = post_text)
+
+        db.session.add(postOnWall)
+
+        db.session.commit()
+
+
+    # WOrk on this tomorrow
+    # Problem joining table
+    def FetchPostAndComment(self, class_room_id):
+
+        # postAndComment = wall_post.query.filter_by(class_room_id = class_room_id)
+
+        postAndComment = db.session.query(wall_post, teacher_info, student_info).join(wall_post).filter(wall_post.class_room_id == class_room_id).join(teacher_info).filter(teacher_info.teacher_id == wall_post.teacher_id).join(student_info).filter(student_info.student_id == wall_post.teacher_id)
+
+        return postAndComment
 
     def TeacherName(self, teacher_id):
 
@@ -86,12 +105,12 @@ class QueryClass:
         __tablename__ = 'HAH'
 
         current_availability = teacher_availability.query.filter_by(teacher_id = teacher_id).first()
-        returnedValue =  db.session.query(student_info, belongs_to, class_room, course, course_info).join(belongs_to).filter(belongs_to.student_id == 1).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(course_info).filter(course_info.course_code == course.course_code).all()
+        returnedValue =  db.session.query(student_info, belongs_to, class_room, course, course_info).join(belongs_to).filter(belongs_to.student_id == session['user_id']).join(class_room).filter(class_room.class_room_id == belongs_to.class_room_id).join(course).filter(course.class_room_id == class_room.class_room_id).join(course_info).filter(course_info.course_code == course.course_code).all()
 
         for i in returnedValue:
             if str(session['user_id']) == str(i.student_info.student_id) and str(teacher_id) == str(i.course.teacher_id) and str(course_section) == str(i.course.course_section) and course_code == i.course.course_code and details == i.course_info.course_name:
-                return True, current_availability.availability
-        return False, current_availability.availability
+                return True, current_availability.availability, i.belongs_to.class_room_id
+        return False, current_availability.availability, "none"
 
         # return False
 

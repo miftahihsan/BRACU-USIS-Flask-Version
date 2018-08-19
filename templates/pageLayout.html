@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" ng-app = "app" ng-init = "selectedChanelID = '{{ session['channelOwnerId'] }}'; teacher_loged_in_id = '{{ session['user_id'] }}';
-teacher_availability = '{{ availability }}'; user_identity = '{{ session['user_Identity'] }}'; ">
+<!-- original was teacher_loged_in_id = = '{{ session['user_id'] }}'; but now changed it to user_ID -->
+<html lang="en" dir="ltr" ng-app = "app" ng-init = "selectedChanelID = '{{ session['channelOwnerId'] }}'; user_ID = '{{ session['user_id'] }}';
+teacher_availability = '{{ availability }}'; user_identity = '{{ session['user_Identity'] }}'; class_room_id = '{{class_room_id}}'; ">
   <head>
     <meta charset="utf-8">
 
@@ -24,6 +25,7 @@ teacher_availability = '{{ availability }}'; user_identity = '{{ session['user_I
 
     <!-- Calling in my custom file  -->
     <script type="text/javascript" src="{{url_for('static', filename = 'javaScripts/socketIO.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename = 'javaScripts/scripts.js')}}"></script>
 
   </body>
 </html>

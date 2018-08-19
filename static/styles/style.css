@@ -36,7 +36,7 @@
   height: 35px;
 }
 
-/******************************************************************  THis is for the layout page   **********************************************************************/
+/******************************************************************  THis is for the commonlayout page   **********************************************************************/
 #layout-page-id{
   min-width: 700px;
   overflow-x: hidden;
@@ -80,6 +80,14 @@
 .search-button{
   width: 90px;
 }
+
+/******************************************************************  THis is for the Footer   **********************************************************************/
+.footer-container{
+  text-align: center;
+  padding: 50px 0 50px 0;
+  background-color: #f2f6ff;
+}
+
 
 /******************************************************************  THis is for the login page   **********************************************************************/
 #login-body{
@@ -163,10 +171,30 @@
 
 
 /******************************************************************  THis is for the ClassRoom page   **********************************************************************/
-.class_nav_bar{
+.class-nav-bar{
   color: white;
   text-align: center;
 }
+
+.class-nav-bar-btn{
+  height: 60px;
+  padding: 0px;
+}
+
+/* This part removes the modal age shift left effect */
+.modal {
+    overflow-y: auto;
+}
+
+.modal-open {
+    overflow: auto;
+    /* overflow: visible; */
+}
+
+.modal-open[style] {
+    padding-right: 0px !important;
+}
+
 .class-room-nav-links{
   margin-top: 20px;
 }
@@ -198,6 +226,14 @@
     margin-top: 110px;
   }
 
+/* edit delete button */
+.dropdown{
+  position: absolute;;
+  right: 0;
+  margin-right: 30px;
+}
+
+
 .class-room-teacher-pic{
     width: 60px;
     border-radius: 50%;
@@ -207,9 +243,27 @@
     margin-top: 20px;
 }
 .container-class-room{
-  margin: 0 auto 0 30px;
-  width: 100%;
-  background-color: orange;
+  margin: 0 auto 0 120px;
+  /* width: 100%; */
+  /* background-color: red; */
+}
+
+.post-body{
+  padding: 30px 30px 30px 10px;
+  /* background-color: orange; */
+}
+
+.post-container{
+  background-color: #EEEEEE;
+}
+
+.post-profilePic{
+    width: 45px;
+    margin-top: 30px;
+    border-radius: 50%;
+}
+.whatsup{
+  /* background-color: red; */
 }
 
 /******************************************************************  THis is The Teachers Side   **********************************************************************/

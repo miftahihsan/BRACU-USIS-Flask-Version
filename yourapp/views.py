@@ -74,7 +74,7 @@ def classRoom(teacher_id, section, code, details):
         # buy chaning the url
         # may be this is not even needed
         # check later
-        is_authorized, availability = query.CheckAuthorization(teacher_id, section, code, details)
+        is_authorized, availability, class_room_id = query.CheckAuthorization(teacher_id, section, code, details)
 
         # if authorized only then show classRoom
         if is_authorized:
@@ -83,8 +83,13 @@ def classRoom(teacher_id, section, code, details):
 
             teacher_name = query.TeacherName(teacher_id)
 
+            # For now just posts later add comments on the sql query
+            
+            # post_and_comments = query.FetchPostAndComment(class_room_id);
+
             return render_template('classRoom.html', teacher_id = teacher_id, section = section,
-             code = code, details = details, teacher_name = teacher_name, availability = availability);
+             code = code, details = details, teacher_name = teacher_name, availability = availability,
+             class_room_id = class_room_id) #, post_and_comments = post_and_comments);
 
         # else return him back to his subscribed room
         return redirect(url_for('subscribedRoom'))
@@ -103,7 +108,19 @@ def before_request():
         g.user_Id = session['user_id']
 
 # ================================================================Socket side code========================================================================
+# This broadcast is done when some-one creates a post
+@socketio.on('boradCastPost')
+def boradCastPost(class_room_id, user_identity, user_id, post_text):
 
+    if user_identity == "Teacher":
+        query.MakePost(class_room_id, user_identity, 1, user_id, post_text)
+    else:
+        query.MakePost(class_room_id, user_identity, user_id, 1, post_text)
+
+    print("HELLO WORLD");
+
+
+# This broadcast is done when teacherLogs out
 @socketio.on('teacherLogOutRequest')
 def teacherLogOutRequest(loged_out, teacher_id):
 
@@ -111,6 +128,9 @@ def teacherLogOutRequest(loged_out, teacher_id):
 
     emit('ShowAvailability', {'availability' : 0, 'teacherID' : teacher_id}, broadcast = True)
 
+
+# This broadcast is done when teacher becomes un available
+# by clicking the button
 @socketio.on('availabilityRequest')
 def handleAvailability(available, teacher_id):
 
