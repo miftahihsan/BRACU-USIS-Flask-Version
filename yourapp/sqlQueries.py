@@ -70,7 +70,9 @@ class QueryClass:
 
         # postAndComment = wall_post.query.filter_by(class_room_id = class_room_id)
 
-        postAndComment = db.session.query(wall_post, teacher_info, student_info).join(wall_post).filter(wall_post.class_room_id == class_room_id).join(teacher_info).filter(teacher_info.teacher_id == wall_post.teacher_id).join(student_info).filter(student_info.student_id == wall_post.teacher_id)
+        postAndComment = db.session.query(class_room, wall_post, teacher_info, student_info).join(wall_post).filter(wall_post.class_room_id == class_room_id).join(student_info).filter(student_info.student_id == wall_post.student_id).join(teacher_info).filter(teacher_info.teacher_id == wall_post.teacher_id).all()
+
+        # list = postAndComment
 
         return postAndComment
 

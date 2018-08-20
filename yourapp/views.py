@@ -84,12 +84,11 @@ def classRoom(teacher_id, section, code, details):
             teacher_name = query.TeacherName(teacher_id)
 
             # For now just posts later add comments on the sql query
-            
-            # post_and_comments = query.FetchPostAndComment(class_room_id);
+            post_and_comments = query.FetchPostAndComment(class_room_id);
 
             return render_template('classRoom.html', teacher_id = teacher_id, section = section,
              code = code, details = details, teacher_name = teacher_name, availability = availability,
-             class_room_id = class_room_id) #, post_and_comments = post_and_comments);
+             class_room_id = class_room_id, post_and_comments = post_and_comments);
 
         # else return him back to his subscribed room
         return redirect(url_for('subscribedRoom'))

@@ -94,5 +94,6 @@ class wall_post(db.Model):
     user_identity = db.Column(db.Unicode, nullable = False)
     teacher_id = db.Column(db.Integer, db.ForeignKey('teacher_info.teacher_id'))
     student_id = db.Column(db.Integer, db.ForeignKey('student_info.student_id'))
+    post_date = db.Column(db.Unicode, nullable = False)
     # poster_id = db.Column(db.Integer, nullable = False)
     post = db.Column(db.Unicode, nullable = False)
